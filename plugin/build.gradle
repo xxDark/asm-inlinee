@@ -1,8 +1,6 @@
-apply plugin: 'groovy'
 apply plugin: 'java-gradle-plugin'
 
 dependencies {
-    compileOnly 'org.codehaus.groovy:groovy-all:2.5.12'
     shade asm
     compileOnly gradleApi()
     shade project(':api')
@@ -11,7 +9,7 @@ dependencies {
 
 gradlePlugin {
     plugins {
-        simplePlugin {
+        asmInlinePlugin {
             id = 'dev.xdark.asminline'
             implementationClass = 'dev.xdark.asminline.AsmInlinePlugin'
         }
@@ -22,6 +20,5 @@ jar {
     from {
         configurations.shade.collect { zipTree(it) }
     }
-    exclude('sun', 'jdk')
 }
 
